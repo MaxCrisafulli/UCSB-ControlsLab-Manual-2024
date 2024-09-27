@@ -88,4 +88,8 @@ The cart controls its position along the track with the smaller motor drive whee
 \subsection*{Instructions}
 The following slides will detail setting up a minimum working SIMULINK model that can pass a voltage to the motor and read position from the cart encoder.
 
+Ensure that you are using MATLAB R2023a and that the QuaRC package (Quanser Realtime Control) is installed. Run the command \texttt{mex -setup} and \texttt{mex -setup C++} in the command line to make sure that MATLAB can interface with a compiler, which should be \texttt{Microsoft Visual C++ Redistributable 2022}. \\
+
+The SIMULINK model \texttt{hardware\_test.mdl} in the Github repo should be configured in such a way that it can be run (assuming all the hardware is setup correctly). It can also be used as a template for other models using the same Hardware.
+
 \end{document}
