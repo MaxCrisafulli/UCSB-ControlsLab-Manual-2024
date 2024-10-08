@@ -66,15 +66,15 @@
 
 %\tableofcontents
 
-\section*{TA Manual for the UCSB ECE Controls Lab}
+\section{TA Manual for the UCSB ECE Controls Lab}
 This document is to act as a guide for TAs in setting up the Quanser inverted pendulum cart hardware in the UCSB ECE Controls Lab (Harold Frank Hall 3120A). This guide is an update of the existing manual, located at:
 \[ \text{ \url{https://github.com/justinpearson/UCSB-Quanser-Inverted-Pendulum-Lab-Manual}}\]
 This updated guide will live (and hopefully be maintained) at 
 \[\text{\url{https://github.com/MaxCrisafulli/UCSB-ControlsLab-Manual-2024}}\]
-\subsection*{Hardware In The Lab}
+\subsection{Hardware In The Lab}
 The ECE147ABC labs make use of the Quanser `Linear Servo Base Unit with Inverted Pendulum'. This manual will detail the setup of just the cart system, with motor voltage as input and linear position as output. There are 3 main components of the hardware setup, with each of which being explained below.
 
-\subsubsection*{Q4 DAQ Board}
+\subsubsection{Q4 DAQ Board}
 The SIMULINK model that interfaces with the hardware interacts with the world via the Q4 HIL control card and DAQ (Data Acquisition Board). The control card is inside the lab PCs connected via PCIe and interfaces with the DAQ board via the two gray ribbon cables. Ensure that these are connected properly and that the red Status LED is lit, indicating that the board is powered.
 \begin{figure}[H]
   \centering
@@ -85,7 +85,7 @@ The DAQ board uses the four encoder ports to read signals from the hardware. Gen
 
 
 
-\subsubsection*{VoltPAQ-X1 Amplifier}
+\subsubsection{VoltPAQ-X1 Amplifier}
 The Quanser VoltPAQ-X1 Amplifier is powered from a standard wall socket, and turned on via a switch at the back of the box. Make sure that the green status LED in the center of the amplifier diagram is lit, indicating that the amplifier is powered on. Also check that the Amplifier Gain switch is set to 1x.
 
 
@@ -99,7 +99,7 @@ The red AV cable coming from Analog Output 0 on the DAQ board should be connecte
 
 The output of the amplifier (To Load) is what drives the motor onboard the cart. Check that all the cable connections are correct and that the cable going to the motor has enough slack to allow the cart to move along the track. 
 
-\subsubsection*{Inverted Pendulum Cart System}
+\subsubsection{Inverted Pendulum Cart System}
 The cart system has 2 encoder outputs and 1 analog voltage input. The positions of these ports may vary between the carts but in general they are as depicted in Figure \ref{fig:cart}. You should check what each of the ports connect to before plugging anything in. \\
 
 The cart controls its position along the track with the smaller motor drive wheel, which is driven by the motor voltage coming from the amplifier. The larger position encoder wheel measures the relative position along the track from the time that the program was initialized in `ticks'. The conversion ratio from ticks to inches is approximately 5000 ticks per 6 inches or 35000 ticks per 1m.
@@ -115,7 +115,7 @@ The cart controls its position along the track with the smaller motor drive whee
 
 
 
-\section*{General Info}
+\section{General Info}
 \begin{itemize}
   \item If the DAQ board light is off, check that the ribbon cables going to/from the PC are connected properly. If there is still an issue then the (minimum 1 Amp) fuse above the LED may need replacing. Make everything is completely unplugged from the DAQ board before doing this. Spare fuses can be found in a toolbox in the gray cabinet at the back right of the lab.
   \item If the DAQ board is not connecting to the PC and the light is on try restarting the computer.
@@ -128,8 +128,8 @@ The cart controls its position along the track with the smaller motor drive whee
 
 
 \newpage
-\section*{Setup Instructions (ECE147A Lab 2)}
-\subsection*{Hardware}\label{subsec:hardware}
+\section{Setup Instructions (ECE147A Lab 2)}
+\subsection{Hardware}\label{subsec:hardware}
 The \textit{MultiQ-4 Terminal Board} (Figure \ref{fig:q4_DAQ}) is a general purpose data acquisition and control board which has eight single ended analog inputs, eight analog outputs, sixteen bits of digital input, sixteen bits of digital output, three programmable timers, and eight encoder inputs decoded in quadrature. For the purposes of this lab, we will be primarily concerned with the analog outputs, the encoder inputs, and, to a lesser extent, the analog inputs.
 \begin{figure}[H]
   \centering 
@@ -140,7 +140,7 @@ The \textit{MultiQ-4 Terminal Board} (Figure \ref{fig:q4_DAQ}) is a general purp
 \noindent Both the analog inputs and outputs are accessed via clearly labeled RCA jacks on the MultiQ-4 board and have a range of ±5 volts. The encoder inputs are accessed via a 5 pin DIN socket and connect directly to the experimental equipment.
 
 \newpage
-\subsubsection*{Hardware Setup}\label{subsubsec:hardware_setup}
+\subsubsection{Hardware Setup}\label{subsubsec:hardware_setup}
 As a basic example, we will set up the system to read in the encoder from the motor cart and output a constant voltage to the motor.
 \begin{enumerate}
   \item You must use \textbf{MATLAB R2023a} \textit{only}. The other versions will not work. Start SIMULINK and create a new model.
@@ -213,7 +213,7 @@ As a basic example, we will set up the system to read in the encoder from the mo
 
 
 
-\subsubsection*{Data Logging}\label{subsubsec:data_logging}
+\subsubsection{Data Logging}\label{subsubsec:data_logging}
 In the Real Time Windows Target, data is logged by scope blocks. Like an oscilloscope, to start the data logging procedure, a trigger is needed to initiate the process. A simple approach is to define a dedicated scope block, with one trigger signal entering it. Put a step function with a step time of 0.001 seconds, which corresponds to one sample time. This set-up will save all but the very first data point. To record data, follow the procedure below.
 \begin{enumerate}
   \item Place a STEP function block from the SOURCES library and a SCOPE block from the SINKS library in your model.
@@ -259,6 +259,33 @@ In the Real Time Windows Target, data is logged by scope blocks. Like an oscillo
   \item \textit{Hint}: Once you have set these parameters as you like, you can RIGHT CLICK on a scope block, drag and drop, and a copy of that block will be placed where you let go of the mouse. The new block will have all of the parameters of the previous, except the Variable name, that will be different and should be changed to something meaningful. 
 \end{enumerate}
 
+
+\section{Demo Model}
+\begin{enumerate}
+  \item Generate the SIMULINK diagram shown in Figure \ref{fig:simulink_loopback}. The Sine wave should have a relatively low magnitude of around 0.75 and a frequency of around 1 Hz.
+  \begin{figure}[H]
+    \centering 
+    \includegraphics[width=.75\textwidth]{Figures/fig10_loopback.png}
+    \caption{SIMULINK Loopback System}
+    \label{fig:simulink_loopback}
+  \end{figure} 
+  \item The output is an integer corresponding to counts. There is certain number of counts/revolution of the optical encoder's shaft. The gain seen in the figure is the `conversion factor for encoder reading'. It should be $1/35000$, ask your TA to make sure. The $1/35000$ factor means that when encoder counts 35,000 in one direction it has moved 1 meter. 
+  \item After creating the system diagram and saving it, build the model following steps written in Section \ref{subsubsec:hardware_setup}. This generates the real-time code for the diagram. Wait until the compilation is complete. The SIMULINK window diagnostics panel displays the progress of the code generation task and, when it is complete, the following message appears:
+  \begin{figure}[H]
+    \centering 
+    \includegraphics[width=.6\textwidth]{Figures/codegen_message.png}
+    \caption{Successful Code Generation Message}
+    \label{fig:build_success}
+  \end{figure}
+  \item Check the necessary wires:
+    \begin{enumerate}
+      \item Connect Analog Output 0 of the MultiQ-4 board to the Quanser Amplifier “Amplifier Command" via the red RCA cable.
+      \item Connect the Quanser Amplifier “To Load" (6 pin DIN) to the motor cart's motor (4 pin DIN). 
+      \item Connect the optical encoder which measures cart position (5 pin DIN) to MultiQ-4 Encoder Input 0 (5 pin DIN). 
+    \end{enumerate}
+  \item Make sure the Amplifier Gain is set to 1x. Ask for the TA’s permission to turn the Quanser Amplifier on. In unexpected situations, turn it off. Place the motor cart in the center of the track.
+  \item You should be able to run the model by clicking MONITOR \& TUNE. Do not move the cursor. Press STOP immediately if needed.
+\end{enumerate}
 
 
 \end{document}
