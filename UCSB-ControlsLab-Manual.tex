@@ -19,10 +19,10 @@
 \usepackage[bottom]{footmisc}
 
 %%%%%%%%%%% SECTION HEADING FONT %%%%%%%%%%%%
-\usepackage[T1]{fontenc}
-\sectionfont{\scshape}
-\subsectionfont{\scshape}
-\subsubsectionfont{\scshape}
+% \usepackage[T1]{fontenc}
+% \sectionfont{\scshape}
+% \subsectionfont{\scshape}
+% \subsubsectionfont{\scshape}
 
 % Bold right arrow
 \newcommand{\baro}{\pmb{\rightarrow}}
@@ -35,11 +35,11 @@
 
 %%%%%%%%%%% TITLEPAGE %%%%%%%%%%%%%
 \begin{center}
-  \Huge{\textsc{\textbf{UCSB ECE Controls Lab TA Manual}}}
+  \Huge{\texttt{UCSB ECE Controls Lab TA Manual}}
   \vspace{0.5cm}
-  \\ \textbf{\textsc{By} \large{\textsc{Max Crisafulli}}}
+  \\ \texttt{By \large{Max Crisafulli}}
   \vspace{0.2cm}
-  \\ \textsc{September 2024}
+  \\ September 2024 (Updated April 2026)
 
   \vspace{\fill}
 
@@ -68,15 +68,15 @@
 %\tableofcontents
 
 \section{TA Manual for the UCSB ECE Controls Lab}
-This document is to act as a guide for TAs in setting up the Quanser inverted pendulum cart hardware in the UCSB ECE Controls Lab (Harold Frank Hall 3120A). This guide is an update of the existing manual, located at:
+This document is to act as a guide for TAs in setting up the Quanser inverted pendulum cart hardware in the UCSB ECE Controls Lab (Harold Frank Hall 3120A). This guide is an update of the existing manual:
 \[ \text{ \url{https://github.com/justinpearson/UCSB-Quanser-Inverted-Pendulum-Lab-Manual}}\]
-This updated guide will live (and hopefully be maintained) at 
+This updated guide will live and (ideally) be maintained at 
 \[\text{\url{https://github.com/MaxCrisafulli/UCSB-ControlsLab-Manual-2024}}\]
 \subsection{Hardware In The Lab}
-The ECE147ABC labs make use of the Quanser `Linear Servo Base Unit with Inverted Pendulum'. This manual will detail the setup of just the cart system, with motor voltage as input and linear position as output. There are 3 main components of the hardware setup, with each of which being explained below.
+The ECE147ABC labs make use of the Quanser ``Linear Servo Base Unit with Inverted Pendulum''. This manual will detail the setup of just the cart system, with motor voltage as input and linear position as output. There are 3 main components of the hardware setup, with each of which being explained below.
 
 \subsubsection{Q4 DAQ Board}
-The SIMULINK model that interfaces with the hardware interacts with the world via the Q4 HIL control card and DAQ (Data Acquisition Board). The control card is inside the lab PCs connected via PCIe and interfaces with the DAQ board via the two gray ribbon cables. Ensure that these are connected properly and that the red Status LED is lit, indicating that the board is powered.
+The \textsc{Simulink} model that interfaces with the hardware interacts with the world via the Q4 HIL control card and DAQ (Data Acquisition Board). The control card is inside the lab PCs connected via PCIe and interfaces with the DAQ board via the two gray ribbon cables. Ensure that these are connected properly and that the red Status LED is lit, indicating that the board is powered.
 \begin{figure}[H]
   \centering
   \includegraphics[width=.75\textwidth]{./Figures/DAQboard_annotated.png}
@@ -120,7 +120,7 @@ The cart controls its position along the track with the smaller motor drive whee
 \begin{itemize}
   \item If the DAQ board light is off, check that the ribbon cables going to/from the PC are connected properly. If there is still an issue then the (minimum 1 Amp) fuse above the LED may need replacing. Make everything is completely unplugged from the DAQ board before doing this. Spare fuses can be found in a toolbox in the gray cabinet at the back right of the lab.
   \item If the DAQ board is not connecting to the PC and the light is on try restarting the computer.
-  \item Contact the IT people for computer problems, MATLAB issues, and getting TA/student login access:
+  \item Contact the IT people for computer problems, \textsc{Matlab} issues, and getting TA/student login access:
   \[\href{mailto:support@ece.ucsb.edu}{\texttt{support@ece.ucsb.edu}}\]
   \item Contact the ECE shop people for issues with the lab hardware:
   \[\href{mailto:shop@ece.ucsb.edu}{\texttt{shop@ece.ucsb.edu}}\]
@@ -144,19 +144,19 @@ The \textit{MultiQ-4 Terminal Board} (Figure \ref{fig:q4_DAQ}) is a general purp
 \subsubsection{Hardware Setup}\label{subsubsec:hardware_setup}
 As a basic example, we will set up the system to read in the encoder from the motor cart and output a constant voltage to the motor.
 \begin{enumerate}
-  \item You must use \textbf{MATLAB R2023a} \textit{only}. The other versions will not work. Start SIMULINK and create a new model.
+  \item You must use \texttt{\textsc{Matlab} R2023a} \textit{only}. The other versions will not work. Start \textsc{Simulink} and create a new model.
   
-  %\item In the blank model window, choose \textbf{Simulation $\baro$ Mode $\baro$ External}
+  %\item In the blank model window, choose \texttt{Simulation $\baro$ Mode $\baro$ External}
   
-  \item Choose \textbf{Modeling $\baro$ Model Settings}
+  \item Choose \texttt{Modeling $\baro$ Model Settings}
   
   \item Set the following parameters
   \begin{enumerate}
-    \item Select \textbf{Solver} from the tree at the left
-    \item Stop time: \textbf{inf} - or whatever $T_f$ is desired (in seconds)
-    \item Solver options, solver type: \textbf{Fixed-Step}
-    \item Solver options, solver: \textbf{discrete} if there are no continuous states. Select a solver like \textbf{ode4} if you are using continuous states (like a continuous transfer function)
-    \item Solver options, Fixed-step size (under Solver details): \textbf{0.001}
+    \item Select \texttt{Solver} from the tree at the left
+    \item Stop time: \texttt{inf} - or whatever $T_f$ is desired (in seconds)
+    \item Solver options, solver type: \texttt{Fixed-Step}
+    \item Solver options, solver: \texttt{discrete} if there are no continuous states. Select a solver like \texttt{ode4} if you are using continuous states (like a continuous transfer function)
+    \item Solver options, Fixed-step size (under Solver details): \texttt{0.001}
     \item The settings are illustrated:
     \begin{figure}[H]
       \centering 
@@ -164,8 +164,8 @@ As a basic example, we will set up the system to read in the encoder from the mo
       \caption{Configuration Parameters}
       \label{fig:4f_settings}
     \end{figure}
-    \item Choose \textbf{Code Generation} in the tree on the left.
-    \item Ensure the System target file is \textbf{quarc\_win64.tlc}. If not, select the \textbf{Browse} button and select it. The settings should look as follows. 
+    \item Choose \texttt{Code Generation} in the tree on the left.
+    \item Ensure the System target file is \texttt{quarc\_win64.tlc}. If not, select the \texttt{Browse} button and select it. The settings should look as follows. 
     \begin{figure}[H]
       \centering 
       \includegraphics[width=.9\textwidth]{Figures/fig3_codegen.png}
@@ -173,40 +173,40 @@ As a basic example, we will set up the system to read in the encoder from the mo
       \label{fig:4h_settings}
     \end{figure}
   \end{enumerate}
-  \item Select OK and return to the SIMULINK model.
-  \item In the SIMULINK Library Browser, find the \textbf{HIL Initialize} block. It is located in \textbf{QuaRC Targets $\baro$ Data Acquisition $\baro$ Generic $\baro$ Configuration}. You can also search by double clicking the model background. Add the block into your model.
+  \item Select OK and return to the \textsc{Simulink} model.
+  \item In the \textsc{Simulink} Library Browser, find the \texttt{HIL Initialize} block. It is located in \texttt{QuaRC Targets $\baro$ Data Acquisition $\baro$ Generic $\baro$ Configuration}. You can also search by double clicking the model background. Add the block into your model.
   \begin{enumerate}
     \item \textit{Aside}: HIL stands for \textit{Hardware In the Loop}. It is a design technique in which the controller hardware is tested with a simulated plant. A flight simulator is an example; the pilot (controller) is connected to simulated inputs and outputs. The technique we are using in the lab is often called \textit{Rapid Control Prototyping}, where a PC controller is connected to actual plant hardware. If you are simulating everything on a computer, like in the prelab, you are doing \textit{offline simulation}.
   \end{enumerate}
-  \item Double click on the \textbf{HIL Initialize} block in your model. Change the Board type to \textbf{q4}. Make sure the Board Identifier is \textbf{0}. Click Apply and Ok out of the block.
+  \item Double click on the \texttt{HIL Initialize} block in your model. Change the Board type to \texttt{q4}. Make sure the Board Identifier is \texttt{0}. Click Apply and Ok out of the block.
   \begin{figure}[H]
     \centering 
     \includegraphics[width=.75\textwidth]{Figures/fig4_HILinit.png}
     \caption{HIL Initialize Parameters}
     \label{fig:HIL_init_params}
   \end{figure}
-  \item Add a \textbf{HIL Write Analog} block and a \textbf{HIL Read Encoder} block to your model. They are in \textbf{QuaRC $\baro$ Data Acquisition $\baro$ Generic $\baro$ Immediate I/O}.
-  \item Connect these blocks as depicted in Figure \ref{fig:simple_model}. In this example, we place a simple constant output and a display for the encoder. \textit{For the purposes of this example, do not output more than 1 volt to the cart to prevent uncontrolled motion.}
+  \item Add a \texttt{HIL Write Analog} block and a \texttt{HIL Read Encoder} block to your model. They are in \texttt{QuaRC $\baro$ Data Acquisition $\baro$ Generic $\baro$ Immediate I/O}.
+  \item Connect these blocks as depicted in Figure \ref{fig:simple_model}. In this example, we place a simple constant output and a display for the encoder. \textit{For the purposes of this example, do not output more than $\pm$2.5 volts to the cart to prevent uncontrolled motion.}
   \begin{figure}[H]
     \centering 
     \includegraphics[width=.8\textwidth]{Figures/fig5_simplemodel.png}
     \caption{Simple Model}
     \label{fig:simple_model}
   \end{figure}
-  \item When your model is ready, save it. From the \textbf{QuaRC} menu, select \textbf{Build}. MATLAB will compile your SIMULINK model into native machine code. You can check the status of the build by clicking \textbf{View diagnostics} at the bottom of the SIMULINK window. \textit{Every time you structurally change your model (add new blocks, rewire existing blocks) you will need to rebuild it or an error will occur.} 
+  \item When your model is ready, save it. From the \texttt{QuaRC} menu, select \texttt{Build}. \textsc{Matlab} will compile your \textsc{Simulink} model into native machine code. You can check the status of the build by clicking \texttt{View diagnostics} at the bottom of the \textsc{Simulink} window. \textit{Every time you structurally change your model (add new blocks, rewire existing blocks) you will need to rebuild it or an error will occur.} 
   \begin{enumerate}
     \item \textit{Tip}: You do not need to rebuild the model if you are changing constants, or blocks that take a constant, like the gain of the gain block. You can even change these constants while the model is running and the change will take effect immediately. 
     \item \textit{Tip}: You can change the constants in a transfer function while stopped or running such that they do not affect the dimensions of the state. That is, the number of poles and zeros must remain the same. Any other change requires a rebuild.
     \item \textit{Use care when changing a running model! Be careful not to leave the model running by accident.}
   \end{enumerate}
   \item Ask your TA to set up the cart for motion. It should be placed in the center of the track and the Quanser Amplifier switched off.
-  \item When the build is completed, go back to the model and choose \textbf{QuaRC $\baro$ Monitor \& Tune}. This downloads the compiled model to the QuaRC execution program and then model will run. The \textbf{Stop} button in the Quarc menu will stop the model as normal.
+  \item When the build is completed, go back to the model and choose \texttt{QuaRC $\baro$ Monitor \& Tune}. This downloads the compiled model to the QuaRC execution program and then model will run. The \texttt{Stop} button in the Quarc menu will stop the model as normal.
   \begin{enumerate}
-    %\item \textit{Tip}: You can also click Connect to Target, followed by the SIMULINK Play Button. This is the same as using the QuaRC menu.
-    \item \textit{Troubleshooting Tip}: If the SIMULINK time is not running (at the bottom of the model window), the QuaRC execution environment may have crashed. Try logging out and logging back in or rebooting the computer.
-    \item \textit{Tip}: Suppose your model is running and MATLAB crashes. The model will continue to run. First, ensure the hardware is not damaged by lifting it off the track and then switching off the Amplifier.
+    %\item \textit{Tip}: You can also click Connect to Target, followed by the \textsc{Simulink} Play Button. This is the same as using the QuaRC menu.
+    \item \textit{Troubleshooting Tip}: If the \textsc{Simulink} time is not running (at the bottom of the model window), the QuaRC execution environment may have crashed. Try logging out and logging back in or rebooting the computer.
+    \item \textit{Tip}: Suppose your model is running and \textsc{Matlab} crashes. The model will continue to run. First, ensure the hardware is not damaged by lifting it off the track and then switching off the Amplifier.
     
-    % After the hardware is safe, stop the model by checking for the Q icon in the system tray (by the clock in the lower right). If the Q icon is not there, start it from Start Menu $\rightarrow$ All Programs $\rightarrow$ Quanser QuaRC $\rightarrow$ Monitor. Right click the Q and choose \textbf{Stop all}.
+    % After the hardware is safe, stop the model by checking for the Q icon in the system tray (by the clock in the lower right). If the Q icon is not there, start it from Start Menu $\rightarrow$ All Programs $\rightarrow$ Quanser QuaRC $\rightarrow$ Monitor. Right click the Q and choose \texttt{Stop all}.
   \end{enumerate}
   \item As the model runs, observe that moving the cart will change the encoder output, as shown on the display. Lift the cart up from the track and turn on the Quanser Amplifier. Observe the motor motion.
   \item Save your basic model to your network drive to use as a starting point for future designs.
@@ -263,15 +263,15 @@ In the Real Time Windows Target, data is logged by scope blocks. Like an oscillo
 
 \section{Demo Model}
 \begin{enumerate}
-  \item Generate the SIMULINK diagram shown in Figure \ref{fig:simulink_loopback}. The Sine wave should have a relatively low magnitude of around 0.75 and a frequency of around 1 Hz.
+  \item Generate the \textsc{Simulink} diagram shown in Figure \ref{fig:Simulink_loopback}. The Sine wave should have a relatively low magnitude of around 0.75 and a frequency of around 1 Hz.
   \begin{figure}[H]
     \centering 
     \includegraphics[width=.75\textwidth]{Figures/fig10_loopback.png}
-    \caption{SIMULINK Loopback System}
-    \label{fig:simulink_loopback}
+    \caption{\textsc{Simulink} Loopback System}
+    \label{fig:Simulink_loopback}
   \end{figure} 
   \item The output is an integer corresponding to counts. There is certain number of counts/revolution of the optical encoder's shaft. The gain seen in the figure is the `conversion factor for encoder reading'. It should be $1/35000$, ask your TA to make sure. The $1/35000$ factor means that when encoder counts 35,000 in one direction it has moved 1 meter. 
-  \item After creating the system diagram and saving it, build the model following steps written in Section \ref{subsubsec:hardware_setup}. This generates the real-time code for the diagram. Wait until the compilation is complete. The SIMULINK window diagnostics panel displays the progress of the code generation task and, when it is complete, the following message appears:
+  \item After creating the system diagram and saving it, build the model following steps written in Section \ref{subsubsec:hardware_setup}. This generates the real-time code for the diagram. Wait until the compilation is complete. The \textsc{Simulink} window diagnostics panel displays the progress of the code generation task and, when it is complete, the following message appears:
   \begin{figure}[H]
     \centering 
     \includegraphics[width=.6\textwidth]{Figures/codegen_message.png}
