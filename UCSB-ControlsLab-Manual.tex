@@ -103,7 +103,7 @@ The output of the amplifier (To Load) is what drives the motor onboard the cart.
 \subsubsection{Inverted Pendulum Cart System}
 The cart system has 2 encoder outputs and 1 analog voltage input. The positions of these ports may vary between the carts but in general they are as depicted in Figure \ref{fig:cart}. You should check what each of the ports connect to before plugging anything in. \\
 
-The cart controls its position along the track with the smaller motor drive wheel, which is driven by the motor voltage coming from the amplifier. The larger position encoder wheel measures the relative position along the track from the time that the program was initialized in `ticks'. The conversion ratio from ticks to inches is approximately 5000 ticks per 6 inches or 35000 ticks per 1m.
+The cart controls its position along the track with the smaller motor drive wheel, which is driven by the motor voltage coming from the amplifier. The larger position encoder wheel measures the relative position along the track from the time that the program was initialized in `ticks'. The conversion ratio from ticks to inches is approximately 5000 ticks per 6 inches or 5000 ticks per 0.1524m.
 \begin{figure}[H]
   \centering
   \includegraphics[width=.75\textwidth]{./Figures/cart_annotated.png}
@@ -129,7 +129,7 @@ The cart controls its position along the track with the smaller motor drive whee
 
 
 \newpage
-\section{Setup Instructions (ECE147A Lab 2)}
+\section{Setup Instructions}
 \subsection{Hardware}\label{subsec:hardware}
 The \textit{MultiQ-4 Terminal Board} (Figure \ref{fig:q4_DAQ}) is a general purpose data acquisition and control board which has eight single ended analog inputs, eight analog outputs, sixteen bits of digital input, sixteen bits of digital output, three programmable timers, and eight encoder inputs decoded in quadrature. For the purposes of this lab, we will be primarily concerned with the analog outputs, the encoder inputs, and, to a lesser extent, the analog inputs.
 \begin{figure}[H]
