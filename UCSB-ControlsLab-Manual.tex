@@ -1,4 +1,4 @@
-%& -job-name=test_name
+% %& -job-name=test_name
 %%%%%%%%%%% DOC CLASS & PACKAGES %%%%%%%%%%%%
 \documentclass[11pt,letterpaper]{article}
 \usepackage{graphicx,enumerate,amsmath,titlesec,amssymb,microtype,sectsty,float,subcaption}
@@ -185,7 +185,7 @@ As a basic example, we will set up the system to read in the encoder from the mo
     \caption{HIL Initialize Parameters}
     \label{fig:HIL_init_params}
   \end{figure}
-  \item Add a \texttt{HIL Write Analog} block and a \texttt{HIL Read Encoder} block to your model. They are in \texttt{QuaRC $\baro$ Data Acquisition $\baro$ Generic $\baro$ Immediate I/O}.
+  \item Add a \texttt{HIL Write Analog} block and a \texttt{HIL Read Encoder} block to your model. They are in \texttt{QuaRC $\baro$ Data Acquisition $\baro$ Generic $\baro$ Immediate I/O}. Double click on them and set their \texttt{Sample Time} to 0.001.
   \item Connect these blocks as depicted in Figure \ref{fig:simple_model}. In this example, we place a simple constant output and a display for the encoder. \textit{For the purposes of this example, do not output more than $\pm$2.5 volts to the cart to prevent uncontrolled motion.}
   \begin{figure}[H]
     \centering 
@@ -263,14 +263,14 @@ In the Real Time Windows Target, data is logged by scope blocks. Like an oscillo
 
 \section{Demo Model}
 \begin{enumerate}
-  \item Generate the \textsc{Simulink} diagram shown in Figure \ref{fig:Simulink_loopback}. The Sine wave should have a relatively low magnitude of around 0.75 and a frequency of around 1 Hz.
+  \item Generate the \textsc{Simulink} diagram shown in Figure \ref{fig:Simulink_loopback}. The Sine wave should have a relatively low magnitude of around 2 and a frequency of around 1 Hz.
   \begin{figure}[H]
     \centering 
     \includegraphics[width=.75\textwidth]{Figures/fig10_loopback.png}
     \caption{\textsc{Simulink} Loopback System}
     \label{fig:Simulink_loopback}
   \end{figure} 
-  \item The output is an integer corresponding to counts. There is certain number of counts/revolution of the optical encoder's shaft. The gain seen in the figure is the `conversion factor for encoder reading'. It should be $1/35000$, ask your TA to make sure. The $1/35000$ factor means that when encoder counts 35,000 in one direction it has moved 1 meter. 
+  \item The output is an integer corresponding to counts. There is certain number of counts/revolution of the optical encoder's shaft. The gain seen in the figure is the `conversion factor for encoder reading'. It should be $0.1524/5000$ for meters or $6/5000$ for inches, ask your TA to make sure. 
   \item After creating the system diagram and saving it, build the model following steps written in Section \ref{subsubsec:hardware_setup}. This generates the real-time code for the diagram. Wait until the compilation is complete. The \textsc{Simulink} window diagnostics panel displays the progress of the code generation task and, when it is complete, the following message appears:
   \begin{figure}[H]
     \centering 
